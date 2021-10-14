@@ -1,0 +1,14 @@
+
+.avatar {
+    width: 150px;
+}
+
+.descriptionBlock {
+    padding: 10px;
+}
+
+.heroImage {
+    max-height: 200px;
+    min-width: 1000px;
+    object-fit: cover;
+}
