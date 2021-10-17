@@ -33,8 +33,7 @@ function App(props) {
             render={() => (
               <Profile
                 profilePage={props.appState.profilePage}
-                addPost={props.addPost}
-                updateNewPostText={props.updateNewPostText}
+                dispatch={props.dispatch}
               />
             )}
           />
