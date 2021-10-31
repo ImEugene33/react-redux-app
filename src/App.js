@@ -24,7 +24,8 @@ function App(props) {
               <Dialogs
                 // dialogs={props.appState.messagesPage.dialogsData}-эти две строки конвертируем в одну
                 // messages={props.appState.messagesPage.messagesData}-за счет общей папки messagesPage
-                state={props.appState.messagesPage}
+
+                store={props.store}
               />
             )}
           />
