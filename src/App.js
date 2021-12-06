@@ -8,7 +8,6 @@ import { BrowserRouter, Route } from "react-router-dom";
 
 function App(props) {
   // выносим постДата выше по иерархии и прокидываем их в пропсы в App
-
   return (
     <BrowserRouter>
       <div className="app-wrapper">
