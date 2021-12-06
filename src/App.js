@@ -3,8 +3,8 @@ import "./App.css";
 import Header from "./components/Header/Header";
 import Nav from "./components/Navbar/Nav";
 import Profile from "./components/Profile/Profile";
-import Dialogs from "./components/Dialogs/Dialogs";
 import { BrowserRouter, Route } from "react-router-dom";
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
 function App(props) {
   // выносим постДата выше по иерархии и прокидываем их в пропсы в App
@@ -20,7 +20,7 @@ function App(props) {
           <Route
             path="/dialogs"
             render={() => (
-              <Dialogs
+              <DialogsContainer
                 // dialogs={props.appState.messagesPage.dialogsData}-эти две строки конвертируем в одну
                 // messages={props.appState.messagesPage.messagesData}-за счет общей папки messagesPage
 
@@ -30,12 +30,7 @@ function App(props) {
           />
           <Route
             path="/profile"
-            render={() => (
-              <Profile
-                profilePage={props.appState.profilePage}
-                dispatch={props.dispatch}
-              />
-            )}
+            render={() => <Profile store={props.store} />}
           />
         </div>
       </div>

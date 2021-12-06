@@ -8,26 +8,24 @@ import {
 } from "../../redux/dialog-reducer";
 
 const Dialogs = (props) => {
-  let state = props.store.getState().messagesPage;
+  let state = props.messagesPage;
 
   // проходим мапом по массиву из объектов. метод мап вызывается для каждого объекта в массиве
   let dialogsElements = state.dialogsData.map((dialog) => (
     <DialogItem name={dialog.name} id={dialog.id} />
   ));
-
   let messagesElements = state.messagesData.map((t) => (
     <Message text={t.message} />
   ));
-  // 1Message 2text={t.3 message} 1-константа, созданная в начале блока,
-  // 2 -непосредственно текст сообщения, принимается в пропсах константы 1
-  // 3-ключ из массива messagesData
   let newMessageBody = state.newMessageBody;
+
   let onMessageClick = () => {
-    props.store.dispatch(sendMessageCreator());
+    props.sendMessage();
   };
+
   let onNewMessageChange = (evt) => {
     let body = evt.target.value;
-    props.store.dispatch(updateNewMessageBodyCreator(body));
+    props.updateNewMessageBody(body);
   };
 
   return (
