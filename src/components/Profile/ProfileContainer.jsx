@@ -2,7 +2,7 @@ import React from "react";
 import Profile from './Profile';
 import {connect} from 'react-redux';
 import {getUserProfile} from '../../redux/profile-reducer';
-import {useRouteMatch} from 'react-router-dom';
+import {Redirect, useRouteMatch} from 'react-router-dom';
 
 
 class ProfileContainer extends React.Component {
@@ -17,13 +17,16 @@ class ProfileContainer extends React.Component {
     }
 
     render() {
+
+        if (!this.props.isAuth) return <Redirect to={'/login'}/>
+
         return (
             <Profile {...this.props} profile={this.props.profile}/>
         );
     }
 }
 
-let mapStateToProps = (state) => ({profile: state.profilePage.profile})
+let mapStateToProps = (state) => ({profile: state.profilePage.profile, isAuth: state.auth.isAuth})
 
 // let WithUrlDataContainerComponent = withRouter(ProfileContainer); //1 метод-устаревший, выпилили в react6
 
