@@ -1,7 +1,7 @@
 import React from "react";
 import Profile from './Profile';
 import {connect} from 'react-redux';
-import {getUserProfile} from '../../redux/profile-reducer';
+import {getStatus, getUserProfile, updateStatus} from '../../redux/profile-reducer';
 import {withRouter} from '../../hoc/withAuthRedirect';
 import {compose} from 'redux';
 
@@ -9,23 +9,27 @@ import {compose} from 'redux';
 class ProfileContainer extends React.Component {
     componentDidMount() {
         // let userId = this.props.params.userId ? this.props.params.userId : '2';
-        let userId = this.props.match ? this.props.match.params.userId : '2';
+        let userId = this.props.match ? this.props.match.params.userId : '21914';
         // let userId = this.props.params.userId ;
         // if(!userId){
         //     userId='2';
         // }
         this.props.getUserProfile(userId);
+        
+        this.props.getStatus(userId);
+
     }
 
     render() {
         return (
-            <Profile {...this.props} profile={this.props.profile}/>
+            <Profile {...this.props} profile={this.props.profile} status={this.props.status}
+                     updateStaus={this.props.updateStatus}/>
         );
     }
 }
 
 
-let mapStateToProps = (state) => ({profile: state.profilePage.profile})
+let mapStateToProps = (state) => ({profile: state.profilePage.profile, status: state.profilePage.status})
 
 
 // let WithUrlDataContainerComponent = withRouter(ProfileContainer); //1 метод-устаревший, выпилили в react6
@@ -42,9 +46,8 @@ let mapStateToProps = (state) => ({profile: state.profilePage.profile})
 
 
 export default compose(
-    connect(mapStateToProps, {getUserProfile}),
+    connect(mapStateToProps, {getUserProfile, getStatus, updateStatus}),
     withRouter,
-    // withAuthRedirect
 )(ProfileContainer)
 
 

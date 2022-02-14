@@ -12,7 +12,7 @@ const ProfileInfo = (props) => {
             <div>
                 <img
                     className={style.heroImage}
-                    src="https://ychef.files.bbci.co.uk/976x549/p051y4n8.jpg"
+                    src="http://www.wincore.ru/uploads/posts/2015-07/1435764975_img9.jpg"
                     alt="hero"
                 />
             </div>
@@ -24,7 +24,7 @@ const ProfileInfo = (props) => {
                     alt="cat"
                 />
                 description
-                <ProfileStatus status={'Hello,everyone'}/>
+                <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
             </div>
         </div>
     );
