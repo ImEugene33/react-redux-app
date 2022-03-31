@@ -2,7 +2,7 @@ import React from 'react';
 import {Field, reduxForm} from 'redux-form';
 import {CustomCheckbox, TextArea} from '../Common/FormsControl/FormsControl';
 import styles from '../Common/FormsControl/FormsControl.module.css';
-import {Button} from '@mui/material';
+import {Alert, Button} from '@mui/material';
 import {required} from '../../utils/validator/validator';
 import {login} from '../../redux/auth-reducer';
 import {Redirect} from 'react-router-dom';
@@ -11,10 +11,18 @@ import {connect} from 'react-redux';
 const LoginForm = (props) => {
     return <div>
         <form onSubmit={props.handleSubmit}>
+
+            {props.error && <Alert variant="filled" severity="error">
+                {props.error}
+            </Alert>}
+            {/*сделал до вывода ошибок, все работает 17 минута 79 видео*/}
+
             <div><Field placeholder={'Email'} name={'email'} component={TextArea} validate={[required]}/></div>
             <div><Field placeholder={'Password'} type={'password'} name={'password'} component={TextArea}
                         validate={[required]}/></div>
             <div><Field name={'remember'} component={CustomCheckbox} type={'checkbox'}/></div>
+
+
             <div>
                 <Button className={styles.button} type="submit">Login</Button>
             </div>
@@ -35,6 +43,7 @@ const Login = (props) => {
 
     return <div>
         <h1>Login</h1>
+
         <LoginReduxForm onSubmit={onSubmit}/>
     </div>
 }

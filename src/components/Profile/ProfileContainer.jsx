@@ -9,13 +9,13 @@ import {compose} from 'redux';
 class ProfileContainer extends React.Component {
     componentDidMount() {
         // let userId = this.props.params.userId ? this.props.params.userId : '2';
-        let userId = this.props.match ? this.props.match.params.userId : '21914';
+        let userId = this.props.match ? this.props.match.params.userId : this.props.authorizedUserId;
         // let userId = this.props.params.userId ;
         // if(!userId){
         //     userId='2';
         // }
         this.props.getUserProfile(userId);
-        
+
         this.props.getStatus(userId);
 
     }
@@ -29,7 +29,12 @@ class ProfileContainer extends React.Component {
 }
 
 
-let mapStateToProps = (state) => ({profile: state.profilePage.profile, status: state.profilePage.status})
+let mapStateToProps = (state) => ({
+    profile: state.profilePage.profile,
+    status: state.profilePage.status,
+    authorizedUserId: state.auth.userId,
+    isAuth: state.auth.isAuth,
+})
 
 
 // let WithUrlDataContainerComponent = withRouter(ProfileContainer); //1 метод-устаревший, выпилили в react6
