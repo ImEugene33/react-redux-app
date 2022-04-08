@@ -7,12 +7,14 @@ import {TextArea} from '../../Common/FormsControl/FormsControl';
 import {Button} from '@mui/material';
 import styles from './../../Common/FormsControl/FormsControl.module.css'
 
-const MyPosts = (props) => {
+const MyPosts = React.memo(props => {
+
+    console.log('Hello')
+
     let postsElements = props.postsData.map((p) => (
         <Post message={p.message} likes={p.likesCount}/>
     ));
     let newPostElement = React.createRef();
-
 
     const onAddPost = (values) => {
         props.addPost(values.newPostText)
@@ -27,7 +29,7 @@ const MyPosts = (props) => {
             <div className={style.posts}>{postsElements}</div>
         </div>
     );
-};
+});
 
 const maxLength10 = maxLengthCreator(10)
 
