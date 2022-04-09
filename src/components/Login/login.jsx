@@ -8,12 +8,12 @@ import {login} from '../../redux/auth-reducer';
 import {Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 
-const LoginForm = (props) => {
+const LoginForm = ({handleSubmit, error}) => {
     return <div>
-        <form onSubmit={props.handleSubmit}>
+        <form onSubmit={handleSubmit}>
 
-            {props.error && <Alert variant="filled" severity="error">
-                {props.error}
+            {error && <Alert variant="filled" severity="error">
+                {error}
             </Alert>}
             {/*сделал до вывода ошибок, все работает 17 минута 79 видео*/}
 

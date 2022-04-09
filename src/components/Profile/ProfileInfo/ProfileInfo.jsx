@@ -3,8 +3,8 @@ import style from "./ProfileInfo.module.css";
 import Preloader from '../../Common/Preloader';
 import ProfileStatusHooks from './ProfileStatusHooks';
 
-const ProfileInfo = (props) => {
-    if (!props.profile) {
+const ProfileInfo = ({profile, status, updateStatus}) => {
+    if (!profile) {
         return <Preloader/>
     }
     return (
@@ -17,14 +17,14 @@ const ProfileInfo = (props) => {
                 />
             </div>
             <div className={style.descriptionBlock}>
-                <img src={props.profile.photos.large}/>
+                <img src={profile.photos.large}/>
                 <img
                     className={style.avatar}
                     src="https://pinster.ru/cache/7c30d78b/avcd43ac08ca90bc0fb74.jpeg"
                     alt="cat"
                 />
                 description
-                <ProfileStatusHooks status={props.status} updateStatus={props.updateStatus}/>
+                <ProfileStatusHooks status={status} updateStatus={updateStatus}/>
             </div>
         </div>
     );
