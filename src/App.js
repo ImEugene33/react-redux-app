@@ -7,9 +7,11 @@ import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from './components/Profile/ProfileContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import LoginPage from './components/Login/login';
-import {connect} from 'react-redux';
+import {connect, Provider} from 'react-redux';
 import {initializeApp} from './redux/app-reducer';
 import Preloader from './components/Common/Preloader';
+import store from './redux/redux-store';
+import {StyledEngineProvider} from '@mui/material/styles';
 
 class App extends React.Component {
     componentDidMount() {
@@ -41,4 +43,15 @@ const mapStateToProps = (state) => ({
     initialized: state.app.initialized
 })
 
-export default connect(mapStateToProps, {initializeApp})(App);
+let AppContainer = connect(mapStateToProps, {initializeApp})(App);
+
+let BlogJsApp = (props) => {
+    return <BrowserRouter>
+        <Provider store={store}>
+            <StyledEngineProvider injectFirst>
+                <AppContainer/>
+            </StyledEngineProvider>
+        </Provider>
+    </BrowserRouter>
+}
+export default BlogJsApp;

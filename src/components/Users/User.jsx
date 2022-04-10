@@ -3,7 +3,7 @@ import styles from "./users.module.css";
 import userIcon from "../../assets/images/user-icon.png";
 import {NavLink} from "react-router-dom";
 
-let User = ({user, followingInProgress, follow, unfollow, ...props}) => {
+let User = ({user, followingInProgress, follow, unfollow, id, ...props}) => {
 
 
     return (

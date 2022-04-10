@@ -1,8 +1,9 @@
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import BlogJsApp from './App';
+import ReactDOM from 'react-dom';
+import React from 'react'
 
 test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+    const div = document.createElement('div')
+    ReactDOM.render(<BlogJsApp/>, div);
+    ReactDOM.unmountComponentAtNode(div)
 });
