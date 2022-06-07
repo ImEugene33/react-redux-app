@@ -13,6 +13,9 @@ import Preloader from './components/Common/Preloader';
 import store from './redux/redux-store';
 import {StyledEngineProvider} from '@mui/material/styles';
 
+// const DialogsContainer = React.lazy(() => import ('./components/Dialogs/DialogsContainer'));
+
+
 class App extends React.Component {
     componentDidMount() {
         this.props.initializeApp();
@@ -46,7 +49,7 @@ const mapStateToProps = (state) => ({
 let AppContainer = connect(mapStateToProps, {initializeApp})(App);
 
 let BlogJsApp = (props) => {
-    return <BrowserRouter>
+    return <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Provider store={store}>
             <StyledEngineProvider injectFirst>
                 <AppContainer/>
