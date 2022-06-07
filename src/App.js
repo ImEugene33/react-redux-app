@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import Nav from "./components/Navbar/Nav";
-import {BrowserRouter, Route} from "react-router-dom";
+import {HashRouter, Route} from "react-router-dom";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from './components/Profile/ProfileContainer';
@@ -49,12 +49,12 @@ const mapStateToProps = (state) => ({
 let AppContainer = connect(mapStateToProps, {initializeApp})(App);
 
 let BlogJsApp = (props) => {
-    return <BrowserRouter basename={process.env.PUBLIC_URL}>
+    return <HashRouter basename={process.env.PUBLIC_URL}>
         <Provider store={store}>
             <StyledEngineProvider injectFirst>
                 <AppContainer/>
             </StyledEngineProvider>
         </Provider>
-    </BrowserRouter>
+    </HashRouter>
 }
 export default BlogJsApp;
