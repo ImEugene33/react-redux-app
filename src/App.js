@@ -26,7 +26,7 @@ class App extends React.Component {
             return <Preloader/>
 
         return (
-            <BrowserRouter>
+            <HashRouter>
                 <div className="app-wrapper">
                     <HeaderContainer/>
                     <Nav/>
@@ -37,7 +37,7 @@ class App extends React.Component {
                         <Route path="/login" render={() => <LoginPage/>}/>
                     </div>
                 </div>
-            </BrowserRouter>
+            </HashRouter>
         );
     }
 }
@@ -49,7 +49,7 @@ const mapStateToProps = (state) => ({
 let AppContainer = connect(mapStateToProps, {initializeApp})(App);
 
 let BlogJsApp = (props) => {
-    return <HashRouter basename={process.env.PUBLIC_URL}>
+    return <HashRouter>
         <Provider store={store}>
             <StyledEngineProvider injectFirst>
                 <AppContainer/>
