@@ -4,7 +4,7 @@ import { Button, Switch, TextField } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import SendIcon from "@mui/icons-material/Send";
 import * as axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 const instance = axios.create({
   withCredentials: true,
@@ -18,34 +18,21 @@ const instance = axios.create({
 //   ProfileDataForm();
 // }, []);
 
-const ProfileDataForm = ({ profile, toEditMode }) => {
-  //   const [state, setState] = useState([]);
-
+const ProfileDataForm = ({ profile, toEditMode, saveProfile }) => {
   const formik = useFormik({
-    initialValues: {
-      fullName: "",
-      lookingForAJob: false,
-      lookingForAJobDescription: "",
-      professionalSkills: "",
-      contacts: "",
-      aboutMe: "",
-    },
+    enableReinitialize: true,
+    initialValues: profile,
 
     onSubmit: (values, actions) => {
       console.log(JSON.stringify(values));
 
-      return instance.put(`profile`, values).then(() => {
-        actions.setSubmitting(false);
-
+      return instance.put(`profile/`, values).then(() => {
+        actions.resetForm({ values: profile });
         toEditMode();
-        console.log(values);
+        actions.setSubmitting(false);
       });
     },
   });
-
-  useEffect(() => {
-    console.log({ formik });
-  }, [formik]);
 
   return (
     <form onSubmit={formik.handleSubmit}>
@@ -71,25 +58,22 @@ const ProfileDataForm = ({ profile, toEditMode }) => {
         id="fullName"
         name="fullName"
         //   value={formik.values.fullName}
-        label="Full Name"
+        label={profile.fullName}
         onChange={formik.handleChange}
       />
 
-      <Switch onChange={formik.handleChange} name="lookingForAJob" />
-
-      <TextField
-        size="small"
-        id="professionalSkills"
-        name="professionalSkills"
-        label="Professional Skills"
+      <Switch
         onChange={formik.handleChange}
+        name="lookingForAJob"
+        id="lookingForAJob"
+        defaultChecked="true"
       />
 
       <TextField
         size="small"
         id="aboutMe"
         name="aboutMe"
-        label="About Me"
+        label={profile.aboutMe}
         onChange={formik.handleChange}
       />
 
@@ -97,28 +81,24 @@ const ProfileDataForm = ({ profile, toEditMode }) => {
         size="small"
         id="lookingForAJobDescription"
         name="lookingForAJobDescription"
-        label="Description"
+        label={profile.lookingForAJobDescription}
         onChange={formik.handleChange}
       />
 
       <div>
         Contacts:
-        {/* <TextField
-          id="contacts"
-          name="contacts"
-          label="Contacts"
-          onChange={formik.handleChange}
-        /> */}
         {Object.keys(profile.contacts).map((key) => {
           return (
             <div>
               {key} :
-              <TextField
-                id="contacts"
-                name="contacts"
-                label={key}
-                onChange={formik.handleChange}
-              />
+              {
+                <TextField
+                  id="contacts"
+                  name={"contacts." + key}
+                  label={profile.contacts[key]}
+                  onChange={formik.handleChange}
+                />
+              }
             </div>
           );
         })}

@@ -17,7 +17,6 @@ const LoginForm = ({ handleSubmit, error }) => {
             {error}
           </Alert>
         )}
-        {/*сделал до вывода ошибок, все работает 17 минута 79 видео*/}
 
         <div>
           <Field
