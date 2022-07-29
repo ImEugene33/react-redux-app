@@ -40,11 +40,11 @@ const ProfileInfo = ({
       savePhoto(e.target.files[0]);
     }
   };
-  //   const onSubmit = ({ values }) => {
-  //     console.log(values);
-  //     //  console.log(formValueRef.current.values);
-  //     // saveProfile(profile);
-  //   };
+    // const onSubmit = ({ values }) => {
+    //   console.log(values);
+    //    console.log(formValueRef.current.values);
+    //   saveProfile(profile);
+    // };
 
   return (
     <div>

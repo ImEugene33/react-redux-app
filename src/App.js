@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import Nav from "./components/Navbar/Nav";
-import {HashRouter, Route} from "react-router-dom";
+import {BrowserRouter, Redirect, Route} from "react-router-dom";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from './components/Profile/ProfileContainer';
@@ -26,18 +26,19 @@ class App extends React.Component {
             return <Preloader/>
 
         return (
-            <HashRouter>
+            <BrowserRouter>
                 <div className="app-wrapper">
                     <HeaderContainer/>
                     <Nav/>
                     <div className="app-wrapper-content">
+                        <Route path="/" render={() => <Redirect to={'/profile'}/>}/>
                         <Route path="/dialogs" render={() => <DialogsContainer/>}/>
                         <Route path="/profile/:userId*" render={() => <ProfileContainer/>}/>
                         <Route path="/users" render={() => <UsersContainer/>}/>
                         <Route path="/login" render={() => <LoginPage/>}/>
                     </div>
                 </div>
-            </HashRouter>
+            </BrowserRouter>
         );
     }
 }
@@ -49,12 +50,13 @@ const mapStateToProps = (state) => ({
 let AppContainer = connect(mapStateToProps, {initializeApp})(App);
 
 let BlogJsApp = (props) => {
-    return <HashRouter>
+    return <BrowserRouter>
         <Provider store={store}>
             <StyledEngineProvider injectFirst>
                 <AppContainer/>
             </StyledEngineProvider>
         </Provider>
-    </HashRouter>
+    </BrowserRouter>
+    
 }
 export default BlogJsApp;

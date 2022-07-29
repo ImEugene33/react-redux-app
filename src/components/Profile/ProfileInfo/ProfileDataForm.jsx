@@ -12,11 +12,7 @@ const instance = axios.create({
   headers: { "API-KEY": "a1e1af33-ed96-4178-924e-0d18de8ee9bc" },
 });
 
-// Подсказка домашнего задания: через useEffect меняем editMode на false, при условии что props.profileUpdateStatus === 'success'
 
-// useEffect(() => {
-//   ProfileDataForm();
-// }, []);
 
 const ProfileDataForm = ({ profile, toEditMode, saveProfile }) => {
   const formik = useFormik({

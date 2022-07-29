@@ -1,23 +1,40 @@
+import { Box, Container, Grid } from "@mui/material";
 import React from "react";
-import Paginator from './Paginator';
+import { useState } from "react";
+import Paginator, { AppPagination } from './Paginator';
 import User from './User';
 
-let Users = ({currentPage, onPageChanged, totalUsersCount, pageSize, users, ...props}) => {
+const Users = ({ currentPage, onPageChanged, totalUsersCount, pageSize, users, ...props }) => {
+
+
 
 
     return (
+        <Container>
+            <Grid  >
 
-        <div>
-            <Paginator currentPage={currentPage}
-                       onPageChanged={onPageChanged}
-                       totalItemsCount={totalUsersCount}
-                       pageSize={pageSize}/>
+                <AppPagination
+                    users={users}
+                    currentPage={currentPage}
+                    onPageChanged={onPageChanged}
+                    totalItemsCount={totalUsersCount}
+                    pageSize={pageSize} />
 
-            {users.map((u) => (
-                <User user={u} followingInProgress={props.followingInProgress} key={u.id}
-                      unfollow={props.unfollow} follow={props.follow}/>
-            ))}
-        </div>
+
+
+                <Box sx={{
+                    display: 'grid',
+                    gap: 1,
+                    gridTemplateColumns: 'repeat(4, 1fr)',
+                }} >
+                    {users.map((u) => (
+                        <User user={u} followingInProgress={props.followingInProgress} key={u.id}
+
+                            unfollow={props.unfollow} follow={props.follow} />
+
+                    ))}</Box>
+            </Grid>
+        </Container>
     );
 };
 
