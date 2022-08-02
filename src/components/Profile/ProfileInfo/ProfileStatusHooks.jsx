@@ -1,4 +1,5 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
+import style from "./ProfileInfo.module.css";
 
 const ProfileStatusHooks = (props) => {
 
@@ -23,17 +24,17 @@ const ProfileStatusHooks = (props) => {
     }
 
     return (
-        <div>
+        <div >
             {!editMode &&
-            <div>
-                <span onDoubleClick={activateEditMode}>{props.status || 'Status Qo'}</span>
-            </div>
+                <div>
+                    <span onDoubleClick={activateEditMode}>{props.status || 'Status Qo'}</span>
+                </div>
             }
             {editMode &&
-            <div>
-                <input onChange={onStatusChange} autoFocus={true} onBlur={deactivateEditMode} value={status}
-                />
-            </div>
+                <div>
+                    <input onChange={onStatusChange} autoFocus={true} onBlur={deactivateEditMode} value={status}
+                    />
+                </div>
             }
         </div>
     )

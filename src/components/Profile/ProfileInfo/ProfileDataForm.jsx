@@ -4,7 +4,7 @@ import { Button, Switch, TextField } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import SendIcon from "@mui/icons-material/Send";
 import * as axios from "axios";
-import { useEffect, useState, useRef } from "react";
+
 
 const instance = axios.create({
   withCredentials: true,
@@ -23,8 +23,8 @@ const ProfileDataForm = ({ profile, toEditMode, saveProfile }) => {
       console.log(JSON.stringify(values));
 
       return instance.put(`profile/`, values).then(() => {
-        actions.resetForm({ values: profile });
-        toEditMode();
+        // actions.resetForm({ values: profile });
+        toEditMode(formik.values);
         actions.setSubmitting(false);
       });
     },

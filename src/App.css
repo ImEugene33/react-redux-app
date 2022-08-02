@@ -1,13 +1,24 @@
+body {
+
+    background-color: rgb(255, 255, 255);
+    background-image: radial-gradient(rgb(233, 196, 196) 0.5%, transparent 11%),
+        radial-gradient(rgb(233, 196, 196) 0.5%, transparent 11%);
+    background-size: 20px 20px;
+    background-position: 0 0, 10px 10px;
+    background-repeat: repeat;
+}
+
+
 .app-wrapper {
     display: grid;
     margin: 0 auto;
-    width: 1200px;
+    max-width: 1200px;
     grid-template-areas:
-    "h h"
-    "n c";
+        "h h"
+        "n c";
     grid-template-rows: 60px 1fr;
     grid-template-columns: 2fr 10fr;
-    grid-gap: 5px;
+    grid-gap: 3px;
 }
 
 .app-wrapper-content {

@@ -7,6 +7,7 @@ import {
   savePhoto,
   updateStatus,
   saveProfile,
+  setProfile
 } from "../../redux/profile-reducer";
 import { compose } from "redux";
 import Profile from "./Profile";
@@ -20,9 +21,9 @@ class ProfileContainer extends React.Component {
         this.props.history.push("/login");
       }
     }
+    this.props.getStatus(userId);
     this.props.getUserProfile(userId);
 
-    this.props.getStatus(userId);
   }
 
   componentDidMount() {
@@ -51,6 +52,7 @@ class ProfileContainer extends React.Component {
         status={this.props.status}
         savePhoto={this.props.savePhoto}
         updateStaus={this.props.updateStatus}
+        setProfile={this.props.setProfile}
       />
     );
   }
@@ -82,6 +84,7 @@ export default compose(
     updateStatus,
     savePhoto,
     saveProfile,
+    setProfile
   }),
   withRouter
 )(ProfileContainer);

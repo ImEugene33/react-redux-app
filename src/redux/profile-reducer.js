@@ -93,4 +93,8 @@ export const saveProfile = (profile) => async (dispatch, getState) => {
   }
 };
 
+export const setProfile=(profile)=>async (dispatch)=>{
+    dispatch(setUserProfile(profile));
+}
+
 export default profileReducer;

@@ -4,14 +4,11 @@ import Preloader from "../../Common/Preloader";
 import userPhoto from "../../../assets/images/user-icon.png";
 import ProfileStatusHooks from "./ProfileStatusHooks";
 import ProfileDataForm from "./ProfileDataForm";
-import { Button } from "@mui/material";
-import * as axios from "axios";
+import { Button, Container, Icon } from "@mui/material";
+import logo from "../../../assets/images/megaphone-icon-45758.png";
+import { Box } from "@mui/system";
 
-const instance = axios.create({
-  withCredentials: true,
-  baseURL: `https://social-network.samuraijs.com/api/1.0/`,
-  headers: { "API-KEY": "a1e1af33-ed96-4178-924e-0d18de8ee9bc" },
-});
+
 
 const ProfileInfo = ({
   profile,
@@ -20,16 +17,18 @@ const ProfileInfo = ({
   isOwner,
   savePhoto,
   saveProfile,
+  setProfile,
+
 }) => {
   const [editMode, setEditMode] = useState(false);
 
-  useEffect(() => {
-    const getData = async () => {
-      const data = await instance.get(`profile/21914`);
-      saveProfile(data.data);
-    };
-    getData();
-  }, [editMode, saveProfile]);
+  // useEffect(() => {
+  //   const getData = async () => {
+  //     const data = await instance.get(`profile/21914`);
+  //     saveProfile(data.data);
+  //   };
+  //   getData();
+  // }, [editMode, saveProfile]);
 
   if (!profile) {
     return <Preloader />;
@@ -40,30 +39,37 @@ const ProfileInfo = ({
       savePhoto(e.target.files[0]);
     }
   };
-    // const onSubmit = ({ values }) => {
-    //   console.log(values);
-    //    console.log(formValueRef.current.values);
-    //   saveProfile(profile);
-    // };
+  // const onSubmit = ({ values }) => {
+  //   console.log(values);
+  //    console.log(formValueRef.current.values);
+  //   saveProfile(profile);
+  // };
 
   return (
     <div>
-      <div>
-        <img
-          className={style.heroImage}
-          src="http://www.wincore.ru/uploads/posts/2015-07/1435764975_img9.jpg"
-          alt="hero"
-        />
-      </div>
+      <Box className={style.heroImage}>
+
+        <img className={style.imageIcon} src={logo} />
+
+        <h3 className={style.heroHeader}>Members Newsfeed</h3>
+        <div className={style.heroText}>Check what your friends have been up to!</div>
+      </Box>
+
+
       <div className={style.descriptionBlock}>
-        <img alt="ava" src={profile.photos.large || userPhoto} />
-        {isOwner && <input type={"file"} onChange={onPhotoSelected} />}
+        <img className={style.avatar} alt="ava" src={profile.photos.large || userPhoto} />
+        {isOwner && <input className={style.input} id={'input'} type={"file"} onChange={onPhotoSelected} />}
+        <label htmlFor="input">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"></path></svg>
+          <span>Choose a file…</span>
+        </label>
         {editMode ? (
           <ProfileDataForm
             saveProfile={saveProfile}
-            // onSubmit={onSubmit}
             profile={profile}
-            toEditMode={() => {
+            setProfile={setProfile}
+            toEditMode={(newProfile) => {
+              setProfile(newProfile)
               setEditMode(false);
             }}
           />
@@ -76,8 +82,9 @@ const ProfileInfo = ({
             profile={profile}
           />
         )}
-        Status:{" "}
-        <ProfileStatusHooks status={status} updateStatus={updateStatus} />
+        <div className={style.status}>
+          Status:  <ProfileStatusHooks status={status} updateStatus={updateStatus} />
+        </div>
       </div>
     </div>
   );

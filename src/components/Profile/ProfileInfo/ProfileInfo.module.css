@@ -1,14 +1,100 @@
-
 .avatar {
     width: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid #2d5be3
+}
+
+.avatar:hover {
+    border: 2px solid yellow;
+}
+
+.input {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.input+label :hover {
+    /* color: aliceblue; */
+    font-size: 1.30rem;
+}
+
+.input+label {
+    max-width: 80%;
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+    display: inline-block;
+    overflow: hidden;
+    padding: 0.625rem 1.25rem;
+}
+
+.input+label svg {
+    margin-right: 0.75em;
 }
 
 .descriptionBlock {
     padding: 10px;
 }
 
+.status {
+    display: flex;
+    gap: 20px;
+    color: aliceblue;
+    position: absolute;
+    left: 17%;
+    top: 1%;
+    margin-left: 20px;
+}
+
+.heroHeader {
+    margin-top: 0;
+    font-size: xx-large;
+    left: 5%;
+    top: 40%;
+    position: absolute;
+    text-decoration: overline;
+}
+
+.heroText {
+    font-size: small;
+    left: 5%;
+    top: 64%;
+    position: absolute;
+}
+
 .heroImage {
-    max-height: 200px;
-    min-width: 1000px;
-    object-fit: cover;
+    position: relative;
+    background-image: url(/src/assets/images/people_2.png), url(/src/assets/images/shape_7.png);
+    background-repeat: no-repeat;
+    background-position: right bottom, right center;
+    background-color: black;
+    color: aliceblue;
+    background-size: auto, cover;
+    min-height: 200px;
+    max-width: 100%;
+}
+
+
+
+.imageIcon {
+    position: absolute;
+    left: 5%;
+    top: 9%;
+    filter: invert(81%) sepia(98%) saturate(1192%) hue-rotate(178deg) brightness(111%) contrast(102%);
+    height: 50px;
+    width: 50px
+}
+
+@media screen and (max-width: 900px) {
+    .heroImage {
+        background-size: cover;
+        background-image: url(/src/assets/images/shape_7.png)
+    }
 }
